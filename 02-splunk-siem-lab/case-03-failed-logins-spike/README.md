@@ -186,7 +186,7 @@ hitting nine different accounts in the same time window is impossible to
 explain as normal behaviour. The screenshot below confirms this finding.
 
 ![All 18 failed attempts confirmed as originating from a single 
-IP address 192.168.1.77](screenshots/04-attacking-ip.png)
+IP address 192.168.1.77](screenshots/04-attacking.png)
 
 ---
 
