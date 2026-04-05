@@ -127,7 +127,7 @@ exclusively from IP address 192.168.1.77. A single IP targeting multiple
 accounts simultaneously is a definitive indicator of an automated password 
 spray tool rather than random user mistakes.
 
-![Attacking IP](screenshots/04-attacking-ip.png)
+![Attacking IP](screenshots/04-attacking.png)
 
 ---
 
