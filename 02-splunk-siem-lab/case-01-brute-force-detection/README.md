@@ -1,6 +1,3 @@
-
-markdown# Case 01 — Brute Force Attack Detection
-
 ## Executive Summary
 A brute force attack was detected against the admin account at SecureCore Ltd.
 The attacker at IP 192.168.1.77 made 33 failed login attempts before 
