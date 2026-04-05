@@ -88,8 +88,7 @@ addresses](screenshots/01-raw-logs.png)
 failed logins versus 12 successful ones, a 76% failure rate which is 
 way above normal. The screenshot below shows the status field
 
-![Status field showing succesful rate abd the failure rate 
-](screenshots/status.png)
+![Status field showing succesful rate abd the failure rate](screenshots/status.png)
 
 ---
 
