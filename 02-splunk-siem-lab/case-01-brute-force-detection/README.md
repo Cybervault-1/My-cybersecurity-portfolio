@@ -2,7 +2,7 @@
 An attacker repeatedly tried to break into the admin account at SecureCore 
 Ltd by guessing passwords over and over until one worked. After getting in, 
 they came back five days later and used the same account to access three 
-critical servers — the domain controller, file server and backup server. 
+critical servers, the domain controller, file server and backup server. 
 This was a serious breach that could have been prevented with basic security 
 controls that were not in place.
 
@@ -69,7 +69,7 @@ index=main
 
 **What this does and why:**
 This pulls everything in the dataset without any filters. Before doing 
-anything else it is important to see the full picture — how many events 
+anything else it is important to see the full picture, how many events 
 are there, what fields exist, and does anything jump out straight away. 
 Going straight to specific queries too early can cause you to miss 
 important context.
@@ -98,7 +98,7 @@ index=main status=failed
 **What this does and why:**
 This filters to only failed logins and counts how many each user got, 
 putting the highest number at the top. The point here is to see whether 
-failures are spread evenly across users — which would suggest normal 
+failures are spread evenly across users which would suggest normal 
 mistakes — or piled up on one account, which would suggest someone is 
 deliberately targeting that account.
 
@@ -146,8 +146,8 @@ a botnet or a group working together.
 | 192.168.1.99 | 3 |
 
 Two IPs showed up. 192.168.1.10 was responsible for 30 of the 33 
-failures — clearly the main attacker. Then 192.168.1.99 appeared 
-with 3 attempts that were described as "Unknown login attempt" — 
+failures, clearly the main attacker. Then 192.168.1.99 appeared 
+with 3 attempts that were described as "Unknown login attempt",
 a different description from the standard Windows failure message, 
 which suggests this second IP was using a different tool or method. 
 The screenshot below shows both IPs and their attempt counts.
@@ -167,7 +167,7 @@ index=main user=admin
 ```
 
 **What this does and why:**
-This pulls all admin account activity — both failures and successes — 
+This pulls all admin account activities both failures and successes  
 in time order. Removing the status filter is important here because 
 you need to see everything, not just the failures. The moment failures 
 turn into a success is the breach point. What happens in the dest_ip 
@@ -176,15 +176,15 @@ column after that tells you where the attacker went.
 **What was found:**
 Two separate attack phases showed up across different dates.
 
-On April 1st, failures started arriving from 192.168.1.10 at 10:00:01 
-— one every few seconds, which is too fast to be manual. After 10 
+On April 1st, failures started arriving from 192.168.1.10 at 10:00:01, 
+one every few seconds, which is too fast to be manual. After 10 
 failures the admin account was successfully accessed at 10:01:00. Then 
 29 minutes later the second IP 192.168.1.99 showed up with its 3 
 unknown attempts — arriving only after the first attacker had already 
 got in, which looks like the two were working together.
 
 Five days later on April 6th the same attacker came back, launched 
-another wave of attempts, and got in again at 10:00:03 — meaning 
+another wave of attempts, and got in again at 10:00:03, meaning 
 whatever was done to fix things the first time was not enough.
 
 The screenshot below shows the full timeline from first failure to 
@@ -211,7 +211,7 @@ coordination with the primary attacker. The timing is the key thing
 to look at here.
 
 **What was found:**
-192.168.1.99 made exactly 3 attempts within 20 seconds — all targeting 
+192.168.1.99 made exactly 3 attempts within 20 seconds, all targeting 
 admin, all on April 1st at 10:30, which is 29 minutes after 192.168.1.10 
 already successfully got in. It made a small number of attempts, stopped, 
 and never came back. The fact that it only appeared after the breach 
@@ -251,7 +251,7 @@ moved across the network hitting three different servers within 47 minutes:
 | 10:45:00 | 10.0.0.20 | File Server |
 | 10:47:00 | 10.0.0.30 | Backup Server |
 
-Getting into the domain controller is the worst possible outcome — 
+Getting into the domain controller is the worst possible outcome,
 whoever controls that controls everything on the network. Getting into 
 the backup server is also critical because attackers destroy backups 
 before launching ransomware to make sure the victim cannot recover. 
