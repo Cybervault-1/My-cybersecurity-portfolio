@@ -84,13 +84,6 @@ appeared in Splunk with all fields correctly loaded.
 ![Raw log overview showing 124 total events across all users and IP 
 addresses](screenshots/01-raw-logs.png)
 
-**What was found:**
-Clicking the status field on the left showed 38 
-failed logins versus 12 successful ones, a 76% failure rate which is 
-way above normal. The screenshot below shows the status field
-
-![Status field showing succesful rate and the failure rate](screenshots/status.png)
-
 ---
 
 ### Step 2 — Identify the Most Targeted Account
