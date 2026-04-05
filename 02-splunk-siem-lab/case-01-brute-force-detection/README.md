@@ -79,16 +79,17 @@ logins. A healthy network has very few failures. If failures are making
 up most of the events something is wrong. 
 The screenshot below shows the full raw dataset as it 
 appeared in Splunk with all fields correctly loaded.
+124 events in total.
 
 ![Raw log overview showing 124 total events across all users and IP 
 addresses](screenshots/01-raw-logs.png)
 
 **What was found:**
-124 events in total. Clicking the status field on the left showed 38 
+Clicking the status field on the left showed 38 
 failed logins versus 12 successful ones, a 76% failure rate which is 
 way above normal. The screenshot below shows the status field
 
-![Status field showing succesful rate abd the failure rate](screenshots/status.png)
+![Status field showing succesful rate and the failure rate](screenshots/status.png)
 
 ---
 
