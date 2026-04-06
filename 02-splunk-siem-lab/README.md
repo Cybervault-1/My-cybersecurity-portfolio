@@ -16,8 +16,8 @@ This section demonstrates hands-on experience using Splunk for log analysis, thr
 
 * Identifying abnormal login patterns
 
-## The dashboard
-# Combines data from three separate investigations:
+### The dashboard
+# Combines data from the three separate investigations:
 * Case 01 — Brute Force Attack
 * Case 02 — Suspicious PowerShell Activity
 * Case 03 — Password Spray Attack
