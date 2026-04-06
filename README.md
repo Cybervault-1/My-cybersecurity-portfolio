@@ -30,6 +30,7 @@ Aspiring SOC Analyst with hands-on experience in network traffic analysis, SIEM 
 - [Case 01 — Brute Force Attack Detection](02-splunk-siem-lab/case-01-brute-force-detection/README.md)
 - [Case 02 — Suspicious PowerShell Activity](02-splunk-siem-lab/case-02-suspicious-powershell/README.md)
 - [Case 03 — Password Spray Attack Detection](02-splunk-siem-lab/case-03-failed-logins-spike/README.md)
+- [SOC Investigation Dashboard](02-splunk-siem-lab/soc-dashboard/README.md)
 ---
 
 ### 🚨 Threat Detection Scenarios
