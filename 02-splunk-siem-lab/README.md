@@ -15,3 +15,9 @@ This section demonstrates hands-on experience using Splunk for log analysis, thr
 ### Case 03 — Failed Login Spike Detection
 
 * Identifying abnormal login patterns
+
+## The dashboard
+# Combines data from three separate investigations:
+* Case 01 — Brute Force Attack
+* Case 02 — Suspicious PowerShell Activity
+* Case 03 — Password Spray Attack
