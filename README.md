@@ -47,7 +47,9 @@ Aspiring SOC Analyst with hands-on experience in network traffic analysis, SIEM 
 
 ### 🎣 Phishing Analysis
 
-* (Coming soon)
+🎣 Phishing Analysis
+
+- [Case 01 — Suspicious Email Investigation](05-phishing-analysis/case-01-suspicious-email/README.md)
 
 ---
 
