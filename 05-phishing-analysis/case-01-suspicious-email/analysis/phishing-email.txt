@@ -1,0 +1,31 @@
+From: security@micros0ft-support.com
+To: sarah.jones@securecore.com
+Subject: Your Microsoft Account Has Been Suspended
+Date: Mon, 7 Apr 2026 09:14:32 +0000
+Reply-To: noreply@micros0ft-support.com
+X-Mailer: PHPMailer 6.0
+X-Originating-IP: 185.220.101.45
+Received: from mail.micros0ft-support.com (185.220.101.45)
+          by securecore-mail.com with SMTP
+Message-ID: <20260407091432.4A2F1@micros0ft-support.com>
+
+Dear Microsoft User,
+
+We have detected unusual activity on your Microsoft account. 
+Your account has been temporarily suspended for your protection.
+
+To restore access to your account please verify your identity 
+by clicking the link below within 24 hours or your account 
+will be permanently deleted.
+
+VERIFY YOUR ACCOUNT NOW:
+http://micros0ft-account-verify.ru/login?user=sarah.jones@securecore.com
+
+If you did not request this please contact us immediately at:
+support@micros0ft-support.com
+
+Thank you,
+Microsoft Security Team
+Microsoft Corporation
+One Microsoft Way
+Redmond WA 98052
