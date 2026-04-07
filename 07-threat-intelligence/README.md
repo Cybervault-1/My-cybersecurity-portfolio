@@ -4,8 +4,8 @@ This section demonstrates the use of threat intelligence tools to analyze and va
 
 ## 📂 Cases
 
-### Case 01 — Malicious IP Analysis
+### Case 01 — Domain analysis
 
-### Case 02 — Domain Reputation Analysis
+### Case 02 — Ip reputation
 
 ### Case 03 — File Hash Investigation
