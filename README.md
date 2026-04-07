@@ -1,5 +1,6 @@
 # Cybersecurity Portfolio
 
+# Adetayo Adedeji
 ## 👋 About Me
 
 I am an aspiring SOC Analyst with hands-on experience investigating 
