@@ -1,6 +1,6 @@
-# Adetayo Adedeji
 ## 👋 About Me
 
+# Adetayo Adedeji
 I am an aspiring SOC Analyst with hands-on experience investigating 
 real-world attack scenarios using industry standard security tools. 
 My work focuses on network traffic analysis, SIEM-based threat detection, 
