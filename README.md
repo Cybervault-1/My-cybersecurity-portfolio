@@ -1,5 +1,3 @@
-# Cybersecurity Portfolio
-
 # Adetayo Adedeji
 ## 👋 About Me
 
