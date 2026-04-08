@@ -37,4 +37,4 @@ traced the attack from initial execution through C2 communication,
 persistence, reconnaissance and lateral movement to two internal servers.
 
 [View Case 02](case-02-unauthorized-execution/README.md)
-[Download Log File](case-02-unauthorized-execution/logs/unauthorized-execution-logs.csv)
+- [Download Log File](case-02-unauthorized-execution/logs/unauthorized-execution-logs.csv)
