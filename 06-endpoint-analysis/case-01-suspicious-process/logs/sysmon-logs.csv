@@ -1,0 +1,16 @@
+time,host,user,EventCode,process_name,process_path,parent_process,parent_path,command_line,destination_ip,destination_port,file_created,registry_key,description
+2026-04-09 08:00:00,WKSTN-07,jsmith,1,explorer.exe,C:\Windows\explorer.exe,userinit.exe,C:\Windows\System32\userinit.exe,explorer.exe,,,,,Normal user login process created
+2026-04-09 08:05:00,WKSTN-07,jsmith,1,chrome.exe,C:\Program Files\Google\Chrome\chrome.exe,explorer.exe,C:\Windows\explorer.exe,chrome.exe,,,,, Normal browser launch
+2026-04-09 08:10:00,WKSTN-07,jsmith,3,chrome.exe,C:\Program Files\Google\Chrome\chrome.exe,explorer.exe,C:\Windows\explorer.exe,,142.250.80.46,443,,, Normal HTTPS connection to Google
+2026-04-09 08:15:00,WKSTN-07,jsmith,1,update.exe,C:\Users\jsmith\AppData\Roaming\update.exe,chrome.exe,C:\Program Files\Google\Chrome\chrome.exe,update.exe,,,,, Suspicious process created from browser
+2026-04-09 08:15:10,WKSTN-07,jsmith,3,update.exe,C:\Users\jsmith\AppData\Roaming\update.exe,chrome.exe,C:\Program Files\Google\Chrome\chrome.exe,,185.220.101.45,4444,,, Suspicious outbound connection
+2026-04-09 08:15:20,WKSTN-07,jsmith,11,update.exe,C:\Users\jsmith\AppData\Roaming\update.exe,chrome.exe,C:\Program Files\Google\Chrome\chrome.exe,,,C:\Windows\Temp\svchost32.exe,, Suspicious file created in Temp
+2026-04-09 08:15:30,WKSTN-07,jsmith,1,svchost32.exe,C:\Windows\Temp\svchost32.exe,update.exe,C:\Users\jsmith\AppData\Roaming\update.exe,svchost32.exe,,,,, Malicious child process launched
+2026-04-09 08:15:40,WKSTN-07,jsmith,3,svchost32.exe,C:\Windows\Temp\svchost32.exe,update.exe,C:\Users\jsmith\AppData\Roaming\update.exe,,185.220.101.45,4444,,, Malicious process connecting to C2
+2026-04-09 08:15:50,WKSTN-07,jsmith,13,svchost32.exe,C:\Windows\Temp\svchost32.exe,update.exe,C:\Users\jsmith\AppData\Roaming\update.exe,,,, HKLM\Software\Microsoft\Windows\CurrentVersion\Run\svchost32,Persistence via registry run key
+2026-04-09 08:16:00,WKSTN-07,jsmith,1,cmd.exe,C:\Windows\System32\cmd.exe,svchost32.exe,C:\Windows\Temp\svchost32.exe,cmd.exe /c whoami,,,,, Reconnaissance command executed
+2026-04-09 08:16:10,WKSTN-07,jsmith,1,cmd.exe,C:\Windows\System32\cmd.exe,svchost32.exe,C:\Windows\Temp\svchost32.exe,cmd.exe /c ipconfig,,,,, Network reconnaissance
+2026-04-09 08:16:20,WKSTN-07,jsmith,1,cmd.exe,C:\Windows\System32\cmd.exe,svchost32.exe,C:\Windows\Temp\svchost32.exe,cmd.exe /c net user,,,,, User enumeration
+2026-04-09 08:16:30,WKSTN-07,jsmith,1,cmd.exe,C:\Windows\System32\cmd.exe,svchost32.exe,C:\Windows\Temp\svchost32.exe,cmd.exe /c net localgroup administrators,,,,, Privilege enumeration
+2026-04-09 08:17:00,WKSTN-07,jsmith,3,svchost32.exe,C:\Windows\Temp\svchost32.exe,update.exe,C:\Users\jsmith\AppData\Roaming\update.exe,,10.0.0.5,445,,, Lateral movement attempt to domain controller
+2026-04-09 08:20:00,WKSTN-07,jsmith,1,powershell.exe,C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe,svchost32.exe,C:\Windows\Temp\svchost32.exe,powershell.exe -enc SQBFAFgA,,,,, Encoded PowerShell launched by malware
