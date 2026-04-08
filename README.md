@@ -80,7 +80,9 @@ three realistic attack scenarios with a combined SOC dashboard.
 Formal incident response reports written in SOC style based on 
 confirmed security breaches investigated in the Splunk lab.
 
-(Coming soon)
+- [IR-001 — Brute Force Attack](04-incident-response-reports/IR-001-brute-force-attack/README.md)
+- [IR-002 — PowerShell Compromise](04-incident-response-reports/IR-002-powershell-compromise/README.md)
+- [IR-003 — Password Spray Attack](04-incident-response-reports/IR-003-password-spray-attack/README.md)
 
 ---
 
