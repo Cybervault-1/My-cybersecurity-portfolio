@@ -111,11 +111,6 @@ across domain, IP and file hash investigations.
 
 ---
 
-## 🎯 Currently Working On
-- Incident Response Reports
-- Threat Detection Scenarios
-- Endpoint Analysis
-
 ## 🏆 Certifications
 
 All certifications were completed as part of the **Google Cybersecurity
