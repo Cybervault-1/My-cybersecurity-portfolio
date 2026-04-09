@@ -19,7 +19,7 @@ A brute force attack resulted in two confirmed breaches of the admin
 account and lateral movement across three critical servers including 
 the domain controller and backup server.
 
-[View IR-001]( IR-001-brute-force-attack/README.md)
+[View IR-001](IR-001-brute-force-attack/README.md)
 
 ---
 
