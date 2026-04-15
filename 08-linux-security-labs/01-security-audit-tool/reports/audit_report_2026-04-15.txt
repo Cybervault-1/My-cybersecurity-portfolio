@@ -1,0 +1,156 @@
+============================================
+       NEXACORE SECURITY AUDIT REPORT       
+       Date: Wed Apr 15 07:15:24 AM EDT 2026                        
+============================================
+
+[*] SYSTEM INFORMATION
+--------------------------------------------
+Linux kali 6.18.12+kali-amd64 #1 SMP PREEMPT_DYNAMIC Kali 6.18.12-1kali1 (2026-02-25) x86_64 GNU/Linux
+kali
+
+[*] CURRENTLY LOGGED IN USERS
+--------------------------------------------
+Cybervault seat0        2026-04-15 07:12 (:0)
+
+[*] ALL USER ACCOUNTS ON SYSTEM
+--------------------------------------------
+root
+daemon
+bin
+sys
+sync
+games
+man
+lp
+mail
+news
+uucp
+proxy
+www-data
+backup
+list
+irc
+_apt
+nobody
+systemd-network
+dhcpcd
+systemd-timesync
+messagebus
+tss
+strongswan
+tcpdump
+sshd
+_rpc
+dnsmasq
+avahi
+nm-openvpn
+speech-dispatcher
+usbmux
+nm-openconnect
+pipewire
+lightdm
+statd
+saned
+polkitd
+rtkit
+colord
+pcscd
+mysql
+stunnel4
+geoclue
+Debian-snmp
+sslh
+cups-pk-helper
+redsocks
+_gophish
+iodine
+miredo
+redis
+postgres
+mosquitto
+inetsim
+_gvm
+kali
+vboxadd
+Cybervault
+
+[*] USERS WITH ROOT/SUDO PRIVILEGES
+--------------------------------------------
+kali
+Cybervault
+
+[*] OPEN PORTS
+--------------------------------------------
+Netid State Recv-Q Send-Q Local Address:Port Peer Address:Port
+
+[*] RUNNING SERVICES
+--------------------------------------------
+  UNIT                           LOAD   ACTIVE SUB     DESCRIPTION
+  accounts-daemon.service        loaded active running Accounts Service
+  colord.service                 loaded active running Manage, Install and Generate Color Profiles
+  cron.service                   loaded active running Regular background program processing daemon
+  dbus.service                   loaded active running D-Bus System Message Bus
+  getty@tty1.service             loaded active running Getty on tty1
+  haveged.service                loaded active running Entropy Daemon based on the HAVEGE algorithm
+  lightdm.service                loaded active running Light Display Manager
+  ModemManager.service           loaded active running Modem Manager
+  NetworkManager.service         loaded active running Network Manager
+  polkit.service                 loaded active running Authorization Manager
+  rtkit-daemon.service           loaded active running RealtimeKit Scheduling Policy Service
+  systemd-journald.service       loaded active running Journal Service
+  systemd-logind.service         loaded active running User Login Management
+  systemd-udevd.service          loaded active running Rule-based Manager for Device Events and Files
+  udisks2.service                loaded active running Disk Manager
+  upower.service                 loaded active running Daemon for power management
+  user@1001.service              loaded active running User Manager for UID 1001
+  virtualbox-guest-utils.service loaded active running Virtualbox guest utils
+
+Legend: LOAD   → Reflects whether the unit definition was properly loaded.
+        ACTIVE → The high-level unit activation state, i.e. generalization of SUB.
+        SUB    → The low-level unit activation state, values depend on unit type.
+
+18 loaded units listed.
+
+[*] WORLD-WRITABLE FILES (SECURITY RISK)
+--------------------------------------------
+
+[*] SUID FILES (CAN RUN AS ROOT)
+--------------------------------------------
+/opt/VBoxGuestAdditions-7.2.6/bin/VBoxDRMClient
+/usr/lib/polkit-1/polkit-agent-helper-1
+/usr/lib/xorg/Xorg.wrap
+/usr/lib/chromium/chrome-sandbox
+/usr/lib/dbus-1.0/dbus-daemon-launch-helper
+/usr/lib/openssh/ssh-keysign
+/usr/bin/kismet_cap_rz_killerbee
+/usr/bin/kismet_cap_ti_cc_2540
+/usr/bin/mount
+/usr/bin/fusermount3
+/usr/bin/kismet_cap_ti_cc_2531
+/usr/bin/su
+/usr/bin/chfn
+/usr/bin/ntfs-3g
+/usr/bin/sudo
+/usr/bin/kismet_cap_nrf_mousejack
+/usr/bin/gpasswd
+/usr/bin/kismet_cap_linux_bluetooth
+/usr/bin/kismet_cap_linux_wifi
+/usr/bin/kismet_cap_nxp_kw41z
+/usr/bin/pkexec
+/usr/bin/kismet_cap_nrf_52840
+/usr/bin/kismet_cap_nrf_51822
+/usr/bin/passwd
+/usr/bin/chsh
+/usr/bin/newgrp
+/usr/bin/kismet_cap_hak5_wifi_coconut
+/usr/bin/rsh-redone-rsh
+/usr/bin/umount
+/usr/bin/rsh-redone-rlogin
+/usr/bin/kismet_cap_ubertooth_one
+/usr/sbin/pppd
+/usr/sbin/mount.cifs
+/usr/sbin/mount.nfs
+
+============================================
+         AUDIT COMPLETE                     
+============================================
