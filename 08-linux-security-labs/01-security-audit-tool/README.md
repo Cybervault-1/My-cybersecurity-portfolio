@@ -41,7 +41,7 @@ The script uses `tee -a` to append each section to a persistent report file, ena
 ## Analyst Interpretation
 
 **Privilege Escalation Risk**
-Two accounts holding sudo privileges on a server recently accessed by an external contractor represents an elevated risk. Any account compromise, particularly through credential theft or brute force — could result in full root-level access and complete system compromise.
+Two accounts holding sudo privileges on a server recently accessed by an external contractor represents an elevated risk. Any account compromise, particularly through credential theft or brute force could result in full root-level access and complete system compromise.
 
 **Attack Surface — Running Services**
 Eighteen active services were identified at the time of audit. Each running service represents a potential entry point. Services such as `mysql`, `redis`, and `postgres` detected during enumeration should be reviewed to confirm they are required, patched, and not externally accessible.
