@@ -2,7 +2,7 @@
 
 ## Scenario
 
-Following a two-week contractor engagement at **NexaCore Technologies**, the internal security team flagged anomalous activity on a critical Linux server — including unrecognised user accounts, unauthorised services, and unusual system configurations. A post-access security audit was initiated to assess the integrity of the system before it was returned to production.
+Following a two-week contractor engagement at **NexaCore Technologies**, the internal security team flagged anomalous activity on a critical Linux server , including unrecognised user accounts, unauthorised services, and unusual system configurations. A post-access security audit was initiated to assess the integrity of the system before it was returned to production.
 
 As the Security Analyst assigned to the case, the objective was to develop an automated audit tool capable of systematically enumerating system security posture, identifying misconfigurations, and producing a structured report for the incident response team.
 
@@ -41,7 +41,7 @@ The script uses `tee -a` to append each section to a persistent report file, ena
 ## Analyst Interpretation
 
 **Privilege Escalation Risk**
-Two accounts holding sudo privileges on a server recently accessed by an external contractor represents an elevated risk. Any account compromise — particularly through credential theft or brute force — could result in full root-level access and complete system compromise.
+Two accounts holding sudo privileges on a server recently accessed by an external contractor represents an elevated risk. Any account compromise, particularly through credential theft or brute force — could result in full root-level access and complete system compromise.
 
 **Attack Surface — Running Services**
 Eighteen active services were identified at the time of audit. Each running service represents a potential entry point. Services such as `mysql`, `redis`, and `postgres` detected during enumeration should be reviewed to confirm they are required, patched, and not externally accessible.
@@ -50,7 +50,7 @@ Eighteen active services were identified at the time of audit. Each running serv
 SUID files execute with the privileges of the file owner rather than the user running them. Tools such as `kismet` holding SUID flags present a potential local privilege escalation vector, particularly if the binary contains known vulnerabilities or is accessible to low-privileged users.
 
 **Contractor Access Review**
-Given the context of this audit — a post-contractor system review — particular attention should be paid to any accounts, services, or scheduled tasks created during the engagement period that fall outside approved configurations.
+Given the context of this audit, a post-contractor system review — particular attention should be paid to any accounts, services, or scheduled tasks created during the engagement period that fall outside approved configurations.
 
 ## Skills Demonstrated
 
