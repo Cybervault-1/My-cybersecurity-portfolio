@@ -114,6 +114,7 @@ across domain, IP and file hash investigations.
 Automated security auditing and system hardening on Linux using bash scripting, system enumeration, and security analysis.
 
 - [Project 01 — Automated Security Audit Tool](08-linux-security-labs/01-security-audit-tool/README.md)
+- [Project 02 — Network Intrusion Detection System](08-linux-security-labs/02-network-intrusion-detection/README.md)
 ---
 
 ## 🏆 Certifications
