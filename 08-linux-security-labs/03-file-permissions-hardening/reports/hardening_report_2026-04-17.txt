@@ -1,0 +1,83 @@
+============================================
+     NEXACORE PERMISSIONS HARDENING REPORT  
+     Date: Fri Apr 17 10:15:10 AM EDT 2026                          
+============================================
+
+[*] SENSITIVE FILE PERMISSIONS AUDIT
+--------------------------------------------
+[INFO] 644 /etc/passwd
+[INFO] 640 /etc/shadow
+[INFO] 644 /etc/group
+[INFO] 440 /etc/sudoers
+
+[*] FIXING /etc/passwd PERMISSIONS
+--------------------------------------------
+[FIXED] /etc/passwd set to 644
+
+[*] FIXING /etc/shadow PERMISSIONS
+--------------------------------------------
+[FIXED] /etc/shadow set to 640
+
+[*] SCANNING FOR WORLD-WRITABLE FILES
+--------------------------------------------
+[OK] No world-writable files found
+
+[*] SCANNING FOR UNNECESSARY SUID FILES
+--------------------------------------------
+/opt/VBoxGuestAdditions-7.2.6/bin/VBoxDRMClient
+/usr/lib/polkit-1/polkit-agent-helper-1
+/usr/lib/xorg/Xorg.wrap
+/usr/lib/chromium/chrome-sandbox
+/usr/lib/mysql/plugin/auth_pam_tool_dir/auth_pam_tool
+/usr/lib/dbus-1.0/dbus-daemon-launch-helper
+/usr/lib/openssh/ssh-keysign
+/usr/bin/mount
+/usr/bin/fusermount3
+/usr/bin/kismet_cap_ti_cc_2531
+/usr/bin/su
+/usr/bin/chfn
+/usr/bin/ntfs-3g
+/usr/bin/sudo
+/usr/bin/kismet_cap_nrf_mousejack
+/usr/bin/gpasswd
+/usr/bin/kismet_cap_linux_bluetooth
+/usr/bin/kismet_cap_linux_wifi
+/usr/bin/kismet_cap_nxp_kw41z
+/usr/bin/pkexec
+/usr/bin/kismet_cap_nrf_52840
+/usr/bin/kismet_cap_nrf_51822
+/usr/bin/passwd
+/usr/bin/chsh
+/usr/bin/newgrp
+/usr/bin/kismet_cap_hak5_wifi_coconut
+/usr/bin/rsh-redone-rsh
+/usr/bin/umount
+/usr/bin/rsh-redone-rlogin
+/usr/bin/kismet_cap_ubertooth_one
+/usr/sbin/pppd
+/usr/sbin/mount.cifs
+/usr/sbin/mount.nfs
+
+[*] REMOVING SUID FROM HIGH RISK BINARIES
+--------------------------------------------
+[FIXED] Removed SUID from: /usr/bin/kismet
+[FIXED] Removed SUID from: /usr/bin/kismet_cap_ti_cc_2540
+[FIXED] Removed SUID from: /usr/bin/kismet_cap_rz_killerbee
+
+[*] CHECKING FOR INACTIVE USER ACCOUNTS
+--------------------------------------------
+
+[*] ENFORCING PASSWORD EXPIRY POLICY
+--------------------------------------------
+[FIXED] Password policy enforced for kali account
+Last password change					: Apr 15, 2026
+Password expires					: Jul 14, 2026
+Password inactive					: never
+Account expires						: never
+Minimum number of days between password change		: 7
+Maximum number of days between password change		: 90
+Number of days of warning before password expires	: 14
+
+============================================
+         HARDENING COMPLETE                 
+============================================
