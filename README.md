@@ -112,7 +112,6 @@ across domain, IP and file hash investigations.
 ---
 
 ## 🐧 Linux Security Labs
-
 Automated security auditing and system hardening on Linux using bash scripting, system enumeration, and security analysis.
 
 - [Project 01 — Automated Security Audit Tool](08-linux-security-labs/01-security-audit-tool/README.md)
