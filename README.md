@@ -1,29 +1,30 @@
 ## 👋 About Me
 
-# Adetayo Adedeji
-### Aspiring SOC Analyst
-📍 Lagos, Nigeria | Open to SOC Analyst roles.
+# Adedeji Adetayo
+### SOC Analyst
+📍 Lagos, Nigeria | Open to SOC Analyst and Cybersecurity Analyst roles.
 
-I am an aspiring SOC Analyst with hands-on experience investigating 
-real-world attack scenarios using industry standard security tools. 
-My work focuses on network traffic analysis, SIEM-based threat detection, 
-incident response and threat intelligence enrichment.
+I am a SOC Analyst with hands-on experience investigating real-world attack scenarios using industry standard security tools. My work spans network traffic analysis, SIEM-based threat detection, Linux security auditing, system hardening, incident response and threat intelligence enrichment.
 
-Every project in this portfolio was built from scratch, starting with 
-raw log data, working through a realistic investigation scenario, and 
-producing a professional report documenting findings, IOCs and 
-recommended actions. The goal was not just to learn tools but to think 
-and work like a real Tier 1 SOC analyst.
-
----
+Every project in this portfolio was built from scratch — starting with a realistic investigation scenario, working through live environments or raw log data, and producing professional reports documenting findings, IOCs and recommended actions. The goal was not just to learn tools but to think and work like a real Tier 1 SOC analyst.
 
 ## 🛠️ Skills
 
 **Security Tools**
 - Wireshark — network traffic capture and packet analysis
-- Splunk — log ingestion, SPL queries, SIEM detection and dashboards
+- Splunk — log ingestion, SPL queries, SIEM detection, dashboards and Universal Forwarder configuration
 - VirusTotal — malware and IOC reputation analysis
 - AbuseIPDB — IP reputation and abuse history checking
+- nmap — network reconnaissance and port scanning
+- hydra — credential attack simulation in controlled lab environments
+
+**Linux Security**
+- Bash scripting and automation
+- Linux security auditing and system enumeration
+- File permissions auditing and hardening
+- SUID binary analysis and privilege escalation detection
+- Network intrusion detection and monitoring
+- Splunk Universal Forwarder installation and configuration
 
 **Investigation Skills**
 - Network traffic analysis and protocol inspection
@@ -41,96 +42,70 @@ and work like a real Tier 1 SOC analyst.
 - IOC extraction and summarisation
 - Remediation and recommendation writing
 
----
-
 ## 📂 Projects
 
----
-
 ### 🔍 Wireshark Analysis
-Network traffic investigations using Wireshark to identify malicious 
-activity in packet captures.
+Network traffic investigations using Wireshark to identify malicious activity in packet captures.
 
 - [Case 01 — Malware Beaconing Detection](01-wireshark-analysis/case-01-malware-beaconing/README.md)
 - [Case 02 — HTTP Malware Analysis](01-wireshark-analysis/case-02-http-malware/README.md)
 
----
-
 ### 📊 Splunk SIEM Lab
-Log analysis and threat detection using Splunk and SPL queries across 
-three realistic attack scenarios with a combined SOC dashboard.
+Log analysis and threat detection using Splunk and SPL queries across three realistic attack scenarios with a combined SOC dashboard.
 
 - [Case 01 — Brute Force Attack Detection](02-splunk-siem-lab/case-01-brute-force-detection/README.md)
 - [Case 02 — Suspicious PowerShell Activity](02-splunk-siem-lab/case-02-suspicious-powershell/README.md)
 - [Case 03 — Password Spray Attack Detection](02-splunk-siem-lab/case-03-failed-logins-spike/README.md)
 - [SOC Investigation Dashboard](02-splunk-siem-lab/soc-dashboard/README.md)
 
----
-
 ### 🚨 Threat Detection Scenarios
+
 - [Case 01 — Brute Force Attack Detection](03-threat-detection-scenarios/case-01-brute-force-detection/README.md)
 - [Case 02 — Suspicious PowerShell Detection](03-threat-detection-scenarios/case-02-powershell-detection/README.md)
 - [Case 03 — Password Spray Detection](03-threat-detection-scenarios/case-03-password-spray-detection/README.md)
----
 
 ### 🛡️ Incident Response Reports
-Formal incident response reports written in SOC style based on 
-confirmed security breaches investigated in the Splunk lab.
+Formal incident response reports written in SOC style based on confirmed security breaches investigated in the Splunk lab.
 
 - [IR-001 Brute Force Attack](./04-incident-response-reports/IR-001-brute-force-attack/README.md)
 - [IR-002 — PowerShell Compromise](04-incident-response-reports/IR-002-powershell-compromise/README.md)
 - [IR-003 — Password Spray Attack](04-incident-response-reports/IR-003-password-spray-attack/README.md)
 
----
-
 ### 🎣 Phishing Analysis
-Email threat investigations identifying phishing indicators, tracing 
-sending infrastructure and analysing malicious links safely.
+Email threat investigations identifying phishing indicators, tracing sending infrastructure and analysing malicious links safely.
 
 - [Case 01 — Suspicious Email Investigation](05-phishing-analysis/case-01-suspicious-email/README.md)
 - [Case 02 — Malicious Link Analysis](05-phishing-analysis/case-02-malicious-link/README.md)
 
----
-
 ### 💻 Endpoint Analysis
-System level investigations using Sysmon logs to trace malware execution, 
-process behaviour, C2 communication and lateral movement across compromised 
-workstations.
+System level investigations using Sysmon logs to trace malware execution, process behaviour, C2 communication and lateral movement across compromised workstations.
 
 - [Case 01 — Suspicious Process Detection](06-endpoint-analysis/case-01-suspicious-process/README.md)
 - [Case 02 — Unauthorized Program Execution](06-endpoint-analysis/case-02-unauthorized-execution/README.md)
----
 
 ### 🌐 Threat Intelligence
-IOC enrichment and reputation analysis using VirusTotal and AbuseIPDB 
-across domain, IP and file hash investigations.
+IOC enrichment and reputation analysis using VirusTotal and AbuseIPDB across domain, IP and file hash investigations.
 
 - [Case 01 — Domain Analysis](07-threat-intelligence/case-01-domain-analysis/README.md)
 - [Case 02 — IP Reputation Analysis](07-threat-intelligence/case-02-ip-reputation/README.md)
 - [Case 03 — File Hash Investigation](07-threat-intelligence/case-03-file-hash/README.md)
----
 
 ### 🐧 Linux Security Labs
-Automated security auditing and system hardening on Linux using bash scripting, system enumeration, and security analysis.
+A four-part end-to-end security engagement on a Linux server — covering automated auditing, network intrusion detection, system hardening, and centralised log monitoring via Splunk SIEM integration. All four projects follow a single connected storyline set at NexaCore Technologies.
 
 - [Project 01 — Automated Security Audit Tool](08-linux-security-labs/01-security-audit-tool/README.md)
 - [Project 02 — Network Intrusion Detection System](08-linux-security-labs/02-network-intrusion-detection/README.md)
 - [Project 03 — Linux File Permissions & Access Control Hardening](08-linux-security-labs/03-file-permissions-hardening/README.md)
 - [Project 04 — Linux to Splunk Integration](08-linux-security-labs/04-splunk-integration/README.md)
----
 
 ## 🏆 Certifications
 
-All certifications were completed as part of the **Google Cybersecurity
-Certificate** program on Coursera — a professional level program covering
-the core skills required for entry level cybersecurity roles.
+All certifications were completed as part of the **Google Cybersecurity Certificate** program on Coursera — a professional level program covering the core skills required for entry level cybersecurity roles.
 
 ### Google Cybersecurity Professional Certificate
 ![Google Cybersecurity Professional Certificate](Certifications/google-cybersecurity-professional-certificate.png)
 
 🔗 [Verify Certificate](https://coursera.org/verify/professional-cert/6WSDVPZVYGEM)
-
----
 
 **Individual Courses Completed:**
 
@@ -142,13 +117,10 @@ the core skills required for entry level cybersecurity roles.
 - Sound the Alarm: Detection and Response — [Verify](https://coursera.org/verify/LI4ST1WLS8OX)
 - Automate Cybersecurity Tasks with Python — [Verify](https://coursera.org/verify/GUBVRHFAEZCG)
 
----
-
 ## 📫 Contact
 Feel free to connect with me or verify my credentials using the links below.
 
-* 🎓Coursera Profile: https://www.coursera.org/learner/adetayo-1203
+* 🎓 Coursera Profile: https://www.coursera.org/learner/adetayo-1203
 * GitHub: https://github.com/Cybervault-1
-* Email: [adedejiadetayo33@gmail.com](mailto:adedejiadetayo33@gmail.com)
+* Email: adedejiadetayo33@gmail.com
 * LinkedIn: https://www.linkedin.com/in/adetayo-adedeji-473816337/
----
