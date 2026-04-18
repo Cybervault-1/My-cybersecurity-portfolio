@@ -116,6 +116,7 @@ Automated security auditing and system hardening on Linux using bash scripting, 
 - [Project 01 — Automated Security Audit Tool](08-linux-security-labs/01-security-audit-tool/README.md)
 - [Project 02 — Network Intrusion Detection System](08-linux-security-labs/02-network-intrusion-detection/README.md)
 - [Project 03 — Linux File Permissions & Access Control Hardening](08-linux-security-labs/03-file-permissions-hardening/README.md)
+- [Project 04 — Linux to Splunk Integration](08-linux-security-labs/04-splunk-integration/README.md)
 ---
 
 ## 🏆 Certifications
