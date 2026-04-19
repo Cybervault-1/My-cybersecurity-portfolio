@@ -6,8 +6,7 @@
 
 I am a SOC Analyst with hands-on experience investigating real-world attack scenarios using industry standard security tools. My work spans network traffic analysis, SIEM-based threat detection, Linux security auditing, system hardening, incident response and threat intelligence enrichment.
 
-Every project in this portfolio was built from scratch, starting with a realistic investigation scenario, working through live environments or raw log data, and producing professional reports documenting findings, IOCs and recommended actions. The goal was not just to learn tools but to think and work like a real Tier 1 SOC analyst.
-
+Every project in this portfolio was built from scratch, starting with a realistic investigation scenario, working through live environments or raw log data, and producing professional reports documenting findings, IOCs and recommended actions.
 ## 🛠️ Skills
 
 **Security Tools**
